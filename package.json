@@ -1,0 +1,23 @@
+{
+  "name": "strufy",
+  "version": "1.0.0",
+  "description": "Strufy - Full Stack Application",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "frontend:dev": "cd frontend && npm run dev",
+    "frontend:build": "cd frontend && npm run build",
+    "frontend:start": "cd frontend && npm run start",
+    "backend:dev": "cd backend && npm run dev",
+    "backend:start": "cd backend && npm run start",
+    "dev": "concurrently \"npm run frontend:dev\" \"npm run backend:dev\"",
+    "start": "concurrently \"npm run frontend:start\" \"npm run backend:start\"",
+    "clean": "rm -rf node_modules frontend/node_modules backend/node_modules frontend/.next"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
