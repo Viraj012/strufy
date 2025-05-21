@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "../styles/globals.css";
+import "./globals.css";
 import ClientBody from "./ClientBody";
+import { Toaster } from "@/components/ui/toaster";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Arqit - Transform Your Ideas Into Development Blueprints",
+  title: "Strufy - Transform Your Ideas Into Development Blueprints",
   description:
     "Describe your project idea, and our AI will generate comprehensive development plans, tasks, blueprints, and database schemas — everything you need to bring your vision to life.",
   icons: {
@@ -33,8 +34,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable}`}
       suppressHydrationWarning
     >
-      <body suppressHydrationWarning className="antialiased">
+      <body suppressHydrationWarning className="min-h-screen bg-background text-foreground antialiased">
         <ClientBody>{children}</ClientBody>
+        <Toaster />
       </body>
     </html>
   );
