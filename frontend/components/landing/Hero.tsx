@@ -5,34 +5,29 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
-import { LoadingScreen } from "./LoadingScreen";
+import { useRouter } from "next/navigation";
 
 export function Hero() {
+  const router = useRouter();
   const [prompt, setPrompt] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
-  const [showLoadingScreen, setShowLoadingScreen] = useState(false);
-  const [isGenerationComplete, setIsGenerationComplete] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!prompt.trim()) return;
 
-    // Start generation and show loading screen
+    // Start generation and show loading animation on button
     setIsGenerating(true);
-    setShowLoadingScreen(true);
 
     // Simulate generation process
     setTimeout(() => {
-      setIsGenerationComplete(true);
+      // After generation is complete, redirect to results page
       setIsGenerating(false);
-    }, 8000); // Simulate 8 seconds of generation time
+      router.push("/results");
+    }, 2000); // Simulate 2 seconds of generation time
   };
 
-  const handleCloseLoadingScreen = () => {
-    setShowLoadingScreen(false);
-    setIsGenerationComplete(false);
-    setPrompt(""); // Clear the prompt for next generation
-  };
+
 
   return (
     <>
@@ -110,12 +105,7 @@ export function Hero() {
         </div>
       </section>
 
-      {/* Loading screen overlay */}
-      <LoadingScreen
-        isVisible={showLoadingScreen}
-        isComplete={isGenerationComplete}
-        onClose={handleCloseLoadingScreen}
-      />
+
     </>
   );
 }
